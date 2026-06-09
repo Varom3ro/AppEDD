@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Evaluación de Desempeño por Objetivos (EDD)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    
+    <!-- LOGIN -->
+    <div id="login-modal" class="login-modal hidden">
+      <div class="login-card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <img src="Logo Modusistema.png" alt="Modusistema Logo" style="max-width: 175px;">
+        </div>
+        <h2 style="text-align: center; margin-bottom: 0.2rem;">EVALUACIÓN DE DESEMPEÑO</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">ACCESO</p>
+        
+        <div style="margin-bottom: 1rem;">
+          <label for="login-key" style="display: block; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">Clave de Usuario</label>
+          <input type="password" id="login-key" placeholder="Ingresa tu clave" style="width: 100%; border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 0.25rem;">
+        </div>
+        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          <input type="checkbox" id="show-key">
+          <label for="show-key" style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0;">Mostrar clave</label>
+        </div>
+        
+        <button id="btn-login" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 1rem;">Ingresar</button>
+      </div>
+    </div>
+
+    <!-- APP PRINCIPAL -->
+    <div id="app-content" class="hidden">
+      
+      <!-- NAV BAR -->
+      <nav class="top-nav">
+        <div style="font-weight: bold; display: flex; align-items: center; gap: 0.75rem;">
+          <img src="Logo M.png" alt="M" style="height: 24px;">
+          <span>Sistema EDD</span>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <button id="btn-analytics-nav" class="btn hidden" style="border: 1px solid var(--border-color); font-size: 0.8rem; padding: 0.3rem 0.6rem;">Métricas y KPIs</button>
+          <button id="btn-user-management" class="btn hidden" style="border: 1px solid var(--border-color); font-size: 0.8rem; padding: 0.3rem 0.6rem;">Gestión de Usuarios</button>
+          <button id="btn-dashboard" class="btn hidden" style="border: 1px solid var(--border-color); font-size: 0.8rem; padding: 0.3rem 0.6rem;">Evaluaciones</button>
+          <span id="logged-user-name" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+          <button id="btn-logout" class="btn" style="border: 1px solid var(--border-color); font-size: 0.8rem; padding: 0.3rem 0.6rem;">Cerrar Sesión</button>
+        </div>
+      </nav>
+
+      <!-- USER MANAGEMENT (CRUD) -->
+      <div class="container">
+        <div id="user-management-container" class="module-section hidden">
+          <div class="section-header">
+            <h2>Gestión de Usuarios</h2>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <!-- Selector de Periodicidad Global Corporativa (Solo Administradores) -->
+              <div style="display: flex; align-items: center; gap: 0.4rem; background: var(--card-bg); border: 1px solid var(--border-color); padding: 0.35rem 0.75rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);">
+                <span>📅 Períodos EDD:</span>
+                <select id="global-eval-count" style="width: auto; padding: 0.2rem; cursor: pointer; font-size: 0.8rem; border-radius: 0.25rem; font-weight: bold; border: 1px solid var(--border-color);">
+                  <option value="1">1 (Anual)</option>
+                  <option value="2">2 (Semestral)</option>
+                  <option value="3">3 (Cuatrimestral)</option>
+                  <option value="4" selected>4 (Trimestral)</option>
+                </select>
+              </div>
+              <button id="btn-backup" class="btn btn-success" title="Descargar respaldo de datos">⬇️ Respaldo</button>
+              <button id="btn-restore" class="btn btn-warning" title="Restaurar datos desde archivo">⬆️ Restaurar</button>
+              <input type="file" id="file-restore" class="hidden" accept=".json">
+              <button id="btn-seed-real" class="btn" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); color: white;" title="Generar datos de simulación realistas para todos los colaboradores">⚡ Demo Realista</button>
+              <button id="btn-reset-evals" class="btn btn-danger" title="Reiniciar todas las evaluaciones a blanco">🔄 Reiniciar Evaluaciones</button>
+              <button id="btn-show-add-user" class="btn btn-primary">+ Nuevo Usuario</button>
+            </div>
+          </div>
+          
+          <div id="add-user-form" class="hidden" style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--surface-color);">
+            <h3 id="form-user-title">Crear Nuevo Usuario</h3>
+            <input type="hidden" id="edit-user-id" value="">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+              <input type="text" id="new-user-name" placeholder="Nombre completo" style="border: 1px solid var(--border-color);">
+              <input type="text" id="new-user-ci" placeholder="Cédula (V-12345678)" style="border: 1px solid var(--border-color);">
+              <input type="text" id="new-user-position" placeholder="Cargo" style="border: 1px solid var(--border-color);">
+              <input type="text" id="new-user-dept" placeholder="Departamento" style="border: 1px solid var(--border-color);">
+              <select id="new-user-role" style="border: 1px solid var(--border-color);">
+                <option value="EMPLOYEE">Empleado</option>
+                <option value="SUPERVISOR">Supervisor</option>
+                <option value="ADMIN">Administrador</option>
+              </select>
+              <select id="new-user-supervisor" style="border: 1px solid var(--border-color);">
+                <!-- Dynamic -->
+              </select>
+              <input type="text" id="new-user-key" placeholder="Clave de acceso" style="border: 1px solid var(--border-color);">
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+              <button id="btn-cancel-add-user" class="btn" style="border: 1px solid var(--border-color);">Cancelar</button>
+              <button id="btn-save-new-user" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="users-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%">Nombre</th>
+                  <th style="width: 10%">C.I.</th>
+                  <th style="width: 25%">Cargo / Dept</th>
+                  <th style="width: 10%">Rol</th>
+                  <th style="width: 10%">Clave</th>
+                  <th style="width: 15%">Supervisor</th>
+                  <th style="width: 10%">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="users-tbody">
+                <!-- Renderizado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DASHBOARD (Selector de usuarios) -->
+        <div id="dashboard-container" class="module-section hidden">
+          <!-- Renderizado dinámicamente -->
+        </div>
+
+        <!-- DASHBOARD ANALÍTICO -->
+        <div id="analytics-container" class="module-section hidden">
+          <!-- Renderizado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- EVALUATION WORKSPACE (MODAL) -->
+      <div id="evaluation-overlay" class="evaluation-overlay hidden">
+        <div class="evaluation-workspace">
+          
+          <!-- CABECERA DEL WORKSPACE -->
+          <header class="workspace-header">
+            <button id="btn-close-modal" class="btn-close-modal" title="Cerrar ventana" onclick="closeActiveEvaluation()">&times;</button>
+            <div class="workspace-emp-info">
+              <div><strong>C.I:</strong> <span id="emp-ci"></span></div>
+              <div><strong>Nombre:</strong> <span id="emp-name"></span></div>
+              <div><strong>Cargo:</strong> <span id="emp-position"></span></div>
+              <div><strong>Depto:</strong> <span id="emp-dept"></span></div>
+            </div>
+            
+            <div class="workspace-stats" style="display: flex; align-items: center; gap: 1.5rem;">
+              <button id="btn-print-single-eval" class="btn btn-print-report-nav" style="font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 0.375rem; display: flex; align-items: center; gap: 0.3rem;" title="Descargar ficha de evaluación en PDF (Formato Carta)">📄 Ficha Carta</button>
+              <div class="workspace-stat-item">
+                <span class="workspace-stat-label">Puntaje Global (PTOS)</span>
+                <span class="workspace-stat-value" id="global-score">0.00</span>
+              </div>
+              <div class="workspace-stat-item">
+                <span class="workspace-stat-label">Cumplimiento Total</span>
+                <span class="workspace-stat-value"><span id="total-weight">0</span>%</span>
+              </div>
+            </div>
+          </header>
+
+          <!-- CONTENIDO SCROLLABLE -->
+          <div class="workspace-content">
+            <div id="weight-alert" class="alert-banner hidden" style="margin-bottom: 1rem; background-color: var(--alert-bg); color: var(--alert-text); padding: 0.75rem; border-radius: 0.375rem; text-align: center;">
+              <strong>⚠️ El formato no es válido:</strong> La sumatoria de las ponderaciones debe ser exactamente 100.
+            </div>
+
+            <section class="module-section">
+              <div class="section-header">
+                <h2>Evaluación de Desempeño</h2>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                  <label for="eval-count" style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); display: none;">Nº Evaluaciones:</label>
+                  <select id="eval-count" style="width: auto; padding: 0.4rem; cursor: pointer; display: none;">
+                    <option value="1">1 (Anual)</option>
+                    <option value="2">2 (Semestral)</option>
+                    <option value="3">3 (Cuatrimestral)</option>
+                    <option value="4" selected>4 (Trimestral)</option>
+                  </select>
+                  <label for="eval-potential" style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary);">Potencial:</label>
+                  <select id="eval-potential" style="width: auto; padding: 0.4rem; cursor: pointer;">
+                    <option value="LOW">Bajo</option>
+                    <option value="MEDIUM">Medio</option>
+                    <option value="HIGH">Alto</option>
+                  </select>
+                  <button id="btn-add-category" class="btn btn-primary">+ Añadir Categoría</button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table fixed-table" id="edd-table">
+                  <thead id="edd-thead">
+                    <!-- Renderizado dinámico -->
+                  </thead>
+                  <tbody id="edd-tbody">
+                    <!-- Renderizado dinámico -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="module-section">
+              <div class="section-header">
+                <h2>Bitácora de Incidentes (STAR)</h2>
+                <button id="btn-add-incident" class="btn btn-primary">+ Añadir Incidente</button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table" id="star-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 15%">Mes</th>
+                      <th style="width: 15%">Fecha</th>
+                      <th style="width: 30%">Situación (Evento)</th>
+                      <th style="width: 35%">Consecuencia (Impacto)</th>
+                      <th class="col-action">-</th>
+                    </tr>
+                  </thead>
+                  <tbody id="star-tbody">
+                    <!-- Renderizado dinámico -->
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <footer class="workspace-footer">
+            <button class="btn" style="border: 1px solid var(--border-color); margin-right: auto;" onclick="closeActiveEvaluation()">Cerrar Ventana</button>
+            <span id="emp-status" class="badge"></span>
+            <div id="action-buttons" style="display: flex; gap: 0.5rem;">
+              <!-- Botones de flujo inyectados -->
+            </div>
+          </footer>
+
+        </div>
+      </div> <!-- Fin evaluation-overlay -->
+
+    </div> <!-- Fin app-content -->
+
+    <!-- CONTENEDOR PARA IMPRESIÓN DEL REPORTE (Oculto por defecto en CSS) -->
+    <div id="print-report-container" class="print-only"></div>
+
+    <!-- MODAL DE SELECCIÓN PARA EXPORTAR REPORTE -->
+    <div id="print-select-modal" class="evaluation-overlay hidden">
+      <div class="evaluation-workspace" style="max-width: 500px; height: auto; min-height: 250px;">
+        <header class="workspace-header" style="padding: 1rem 1.5rem;">
+          <button id="btn-close-print-select" class="btn-close-modal" title="Cancelar" onclick="document.getElementById('print-select-modal').classList.add('hidden')">&times;</button>
+          <div style="font-weight: 800; font-size: 1.1rem; color: var(--primary-color);">
+            📄 Configuración de Reporte (PDF/Impresión)
+          </div>
+        </header>
+        
+        <div class="workspace-content" style="padding: 1.5rem;">
+          <div style="margin-bottom: 1.25rem;">
+            <label for="print-supervisor-select" style="display: block; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Seleccionar Supervisor:</label>
+            <select id="print-supervisor-select" style="width: 100%; border: 1px solid var(--border-color); padding: 0.6rem; border-radius: 0.375rem; background: var(--surface-color);">
+              <!-- Inyectado dinámicamente -->
+            </select>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+            * El reporte se compilará agrupando a los colaboradores supervisados. El tamaño de página por defecto está optimizado en <strong>formato Carta (Letter)</strong> con firmas institucionales al pie.
+          </p>
+        </div>
+
+        <footer class="workspace-footer" style="padding: 1rem 1.5rem; justify-content: flex-end;">
+          <button class="btn" style="border: 1px solid var(--border-color);" onclick="document.getElementById('print-select-modal').classList.add('hidden')">Cancelar</button>
+          <button id="btn-confirm-print" class="btn btn-primary" style="background-color: #475569;">Generar Reporte</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- MODAL DE HISTORIAL ANUAL INTERACTIVO -->
+    <div id="history-modal" class="evaluation-overlay hidden">
+      <div class="evaluation-workspace" style="max-width: 900px; height: 80vh;">
+        <header class="workspace-header">
+          <button id="btn-close-history" class="btn-close-modal" title="Cerrar Historial" onclick="document.getElementById('history-modal').classList.add('hidden')">&times;</button>
+          <div style="font-weight: 800; font-size: 1.2rem; color: var(--primary-color);">
+            📅 Reporte Histórico EDD de Año Anterior
+          </div>
+          <div class="workspace-stats">
+            <div class="workspace-stat-item">
+              <span class="workspace-stat-label">Año Consultado</span>
+              <span class="workspace-stat-value" id="history-year-label">-</span>
+            </div>
+            <div class="workspace-stat-item">
+              <span class="workspace-stat-label">Promedio Anual</span>
+              <span class="workspace-stat-value" id="history-score-label">0.00 pts</span>
+            </div>
+          </div>
+        </header>
+        
+        <div class="workspace-content" id="history-modal-body" style="padding: 1.5rem;">
+          <!-- Se inyecta dinámicamente el reporte del año en cuestión -->
+        </div>
+
+        <footer class="workspace-footer">
+          <button class="btn" style="border: 1px solid var(--border-color);" onclick="document.getElementById('history-modal').classList.add('hidden')">Cerrar Reporte</button>
+        </footer>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
