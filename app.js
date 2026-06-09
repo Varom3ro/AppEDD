@@ -6,8 +6,8 @@
 const INITIAL_USERS = [
   {
     "id": "u-admin-ana",
-    "ci": "V-11111111",
-    "name": "Ana Meinhard",
+    "ci": "V-117XXXXX",
+    "name": "Anna Meinhard",
     "position": "Gerente General",
     "department": "Dirección",
     "role": "ADMIN",
@@ -15,314 +15,214 @@ const INITIAL_USERS = [
     "password": "Admin.Ana"
   },
   {
-    "id": "u-admin-andrea",
-    "ci": "V-22222222",
-    "name": "Andrea Granda",
-    "position": "Gerente de RRHH",
-    "department": "Recursos Humanos",
-    "role": "ADMIN",
-    "supervisorId": null,
-    "password": "Admin.Andrea"
-  },
-  {
     "id": "u-ext-v20327194",
-    "ci": "V-20327194",
+    "ci": "V-203XXXXX",
     "name": "Andrea Granada",
     "position": "Gerente de RRHH",
     "department": "Administración y Finanzas",
-    "role": "EMPLOYEE",
+    "role": "ADMIN",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.20327194"
+    "password": "Admin.Andrea"
   },
   {
     "id": "u-ext-v18154875",
-    "ci": "V-18154875",
+    "ci": "V-181XXXXX",
     "name": "Ángel Navarro",
     "position": "Analista de Ventas y Cobranzas",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.18154875"
+    "password": "Edd.Angel"
   },
   {
     "id": "u-ext-v29720696",
-    "ci": "V-29720696",
+    "ci": "V-297XXXXX",
     "name": "Angelimar Caña",
     "position": "Asistente Administrativo",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.29720696"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.Angelimar"
   },
   {
     "id": "u-ext-v27007894",
-    "ci": "V-27007894",
+    "ci": "V-270XXXXX",
     "name": "Angiemar Rivas",
     "position": "Dibujante",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.27007894"
-  },
-  {
-    "id": "u-ext-v6403120",
-    "ci": "V-6403120",
-    "name": "Arelis Garcia",
-    "position": "Auxiliar de limpieza planta",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.6403120"
+    "password": "Edd.Angiemar"
   },
   {
     "id": "u-ext-e84275610",
-    "ci": "E-84275610",
+    "ci": "E-842XXXXX",
     "name": "Beatriz Pulido",
     "position": "Especialista Contable",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.84275610"
-  },
-  {
-    "id": "u-ext-v20802219",
-    "ci": "V-20802219",
-    "name": "Carlos Acosta",
-    "position": "Operario",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.20802219"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.Beatriz"
   },
   {
     "id": "u-ext-v5300740",
-    "ci": "V-5300740",
+    "ci": "V-53XXXXX",
     "name": "Elisabeth Larez",
     "position": "Consultor Senior",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.5300740"
+    "password": "Edd.Elisabeth"
   },
   {
     "id": "u-ext-v18315353",
-    "ci": "V-18315353",
+    "ci": "V-183XXXXX",
     "name": "Gielymar Cáceres",
     "position": "Analista de compras y servicios",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.18315353"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.Gielymar"
   },
   {
     "id": "u-ext-v15133422",
-    "ci": "V-15133422",
+    "ci": "V-151XXXXX",
     "name": "Harold Rengifo",
     "position": "Coord. de Planificacion e Inventario",
     "department": "Operaciones",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.15133422"
+    "supervisorId": "u-ext-v19556977",
+    "password": "Edd.Harold"
   },
   {
     "id": "u-ext-v14387196",
-    "ci": "V-14387196",
+    "ci": "V-143XXXXX",
     "name": "Jonathan Jauregui",
     "position": "Coordinador de Compras y Serv.",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.14387196"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.Jonathan"
   },
   {
     "id": "u-ext-v20129697",
-    "ci": "V-20129697",
+    "ci": "V-201XXXXX",
     "name": "Kelvin Velazco",
     "position": "Ejecutivo Comercial",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.20129697"
-  },
-  {
-    "id": "u-ext-v11632344",
-    "ci": "V-11632344",
-    "name": "Laura Martinez",
-    "position": "Operario",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.11632344"
+    "password": "Edd.Kelvin"
   },
   {
     "id": "u-ext-v24672787",
-    "ci": "V-24672787",
+    "ci": "V-246XXXXX",
     "name": "Luis Segovia",
     "position": "Operario de almacén y despacho",
     "department": "Operaciones",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.24672787"
+    "supervisorId": "u-ext-v19556977",
+    "password": "Edd.Luis"
   },
   {
     "id": "u-ext-v17756748",
-    "ci": "V-17756748",
+    "ci": "V-177XXXXX",
     "name": "Luisana Fermin",
     "position": "Coordinador de Contabilidad",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.17756748"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.Luisana"
   },
   {
     "id": "u-ext-v10246342",
-    "ci": "V-10246342",
+    "ci": "V-102XXXXX",
     "name": "Maria Quintero",
     "position": "Consultor Senior",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.10246342"
+    "password": "Edd.Maria"
   },
   {
     "id": "u-ext-v24210616",
-    "ci": "V-24210616",
+    "ci": "V-242XXXXX",
     "name": "Mariangel Guitian",
     "position": "Analista de Recursos Humanos",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.24210616"
+    "supervisorId": "u-ext-v20327194",
+    "password": "Edd.Mariangel"
   },
   {
     "id": "u-ext-v13233023",
-    "ci": "V-13233023",
+    "ci": "V-132XXXXX",
     "name": "Meyling Márquez",
     "position": "Gerente de Adm y Finanzas",
     "department": "Administración y Finanzas",
-    "role": "EMPLOYEE",
+    "role": "SUPERVISOR",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.13233023"
+    "password": "Super.Meyling"
   },
   {
     "id": "u-ext-v6896225",
-    "ci": "V-6896225",
+    "ci": "V-68XXXXX",
     "name": "Patricia Garcia",
     "position": "Consultor Senior",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.6896225"
-  },
-  {
-    "id": "u-ext-v11030217",
-    "ci": "V-11030217",
-    "name": "Rafael Cordero",
-    "position": "Coordinador de instalaciones",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.11030217"
+    "password": "Edd.Patricia"
   },
   {
     "id": "u-ext-v19556977",
-    "ci": "V-19556977",
+    "ci": "V-195XXXXX",
     "name": "Ranses Guzmán",
     "position": "Jefe de Operaciones",
     "department": "Operaciones",
-    "role": "EMPLOYEE",
+    "role": "SUPERVISOR",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.19556977"
+    "password": "Super.Ranses"
   },
   {
     "id": "u-ext-v6662200",
-    "ci": "V-6662200",
+    "ci": "V-66XXXXX",
     "name": "Roberto Graterol",
     "position": "Consultor de Servicios",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.6662200"
+    "password": "Edd.Roberto"
   },
   {
     "id": "u-ext-v22350304",
-    "ci": "V-22350304",
+    "ci": "V-223XXXXX",
     "name": "Ronald Andrade",
     "position": "Especialista Contable",
     "department": "Administración y Finanzas",
     "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.22350304"
-  },
-  {
-    "id": "u-ext-v6210373",
-    "ci": "V-6210373",
-    "name": "Ronald Peña",
-    "position": "Coordinador de Instalación",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.6210373"
-  },
-  {
-    "id": "u-ext-v12587278",
-    "ci": "V-12587278",
-    "name": "Rosalia Querales",
-    "position": "Operario",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.12587278"
-  },
-  {
-    "id": "u-ext-v6402294",
-    "ci": "V-6402294",
-    "name": "Rufino Pacheco",
-    "position": "Operario",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.6402294"
+    "supervisorId": "u-ext-v13233023",
+    "password": "Edd.RonaldA"
   },
   {
     "id": "u-ext-v11666232",
-    "ci": "V-11666232",
+    "ci": "V-116XXXXX",
     "name": "Victor Ghinaglia",
     "position": "Dibujante",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.11666232"
-  },
-  {
-    "id": "u-ext-v7928538",
-    "ci": "V-7928538",
-    "name": "Zulay Barrios",
-    "position": "Auxiliar de Limpieza Las Mercedes",
-    "department": "Administración y Finanzas",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.7928538"
+    "password": "Edd.Victor"
   },
   {
     "id": "u-ext-v12960939",
-    "ci": "V-12960939",
-    "name": "Zulay Hernándezl",
+    "ci": "V-129XXXXX",
+    "name": "Zulay Hernández",
     "position": "Ejecutivo Comercial",
     "department": "Comercial",
     "role": "EMPLOYEE",
     "supervisorId": "u-admin-ana",
-    "password": "Edd.12960939"
-  },
-  {
-    "id": "u-ext-v11224702",
-    "ci": "V-11224702",
-    "name": "Yajaira Berbesi",
-    "position": "Operario",
-    "department": "Operaciones",
-    "role": "EMPLOYEE",
-    "supervisorId": "u-admin-ana",
-    "password": "Edd.11224702"
+    "password": "Edd.ZulayH"
   }
 ];
 
